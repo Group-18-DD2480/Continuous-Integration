@@ -13,7 +13,7 @@ fast_mail = FastMail(
         MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
         MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
         MAIL_SERVER=os.getenv("MAIL_SERVER"),
-        MAIL_PORT=465,
+        MAIL_PORT=os.getenv("MAIL_PORT"),
         MAIL_STARTTLS=False,
         MAIL_SSL_TLS=True,
     )
