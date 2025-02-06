@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Dict, Any
 import uvicorn
+
+load_dotenv()
 
 app = FastAPI()
 
