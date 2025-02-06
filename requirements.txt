@@ -5,3 +5,4 @@ pydantic
 starlette
 httpx
 pytest
+pytest-asyncio
