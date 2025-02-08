@@ -40,3 +40,12 @@ async def webhook_handler(request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+def run_syntax_check(directory):
+    """
+    Runs a Python syntax check (static analysis) using flake8.
+    """
+    try:
+        result = subprocess.run(["flake8", directory], capture_output=True, text=True)
+        return result.stdout or "No syntax errors found."
+    except Exception as e:
+        return str(e)
