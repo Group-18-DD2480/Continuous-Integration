@@ -104,3 +104,30 @@ Reviever of the Pull Request is responsible for the merger.
 ## License
 
 This project is licensed under MIT License. See `LICENSE` for details.
+
+## Statement of Contributions
+
+#### [@AlessandroColi](https://github.com/AlessandroColi) - Alessandro Coli
+
+- [doc] Create GitHub issues for the project.
+- [doc] Document API and contributions in `README.md`.
+
+
+#### [@eliasfloreteng](https://github.com/eliasfloreteng) - Elias Floreteng
+
+- [doc] Create GitHub issues for the project.
+- [feat] Add GitHub webhook endpoint.
+
+
+#### [@laykos0](https://github.com/laykos0) - Jakub Rybak
+
+- [doc] Create `README.md` with contribution style and license sections
+- [feat] add Skeleton Code for FastAPI.
+- [feat] Add `notification.py`.
+
+
+#### [@RuriThomas](https://github.com/RuriThomas) - Ruri Osmon
+
+
+#### [@YusufDemir1210](https://github.com/YusufDemir1210) - Yusuf Demir
+
