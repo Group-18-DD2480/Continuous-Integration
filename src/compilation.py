@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Request
 import subprocess
 import git
 import os
+import asyncio  # Added for async execution of blocking calls
 
 app = FastAPI()
 
@@ -24,10 +25,10 @@ async def webhook_handler(request: Request):
         # Log which branch triggered the CI
         print(f"Received webhook event for branch: {branch_name}")
 
-        # Pull the latest changes for the triggered branch
+        # Pull the latest changes for the triggered branch asynchronously
         repo = git.Repo(PROJECT_DIR)
-        repo.git.checkout(branch_name)
-        repo.git.pull()
+        await asyncio.to_thread(repo.git.checkout, branch_name)
+        await asyncio.to_thread(repo.git.pull)
 
         # Perform syntax check
         result = run_syntax_check(PROJECT_DIR)
