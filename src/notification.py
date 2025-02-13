@@ -23,7 +23,7 @@ fast_mail = FastMail(
 
 
 class Notification(BaseModel):
-    author: str | None = None
+    authors: list[str] 
     branch: str
     commit: str
     project: str
@@ -57,9 +57,9 @@ def prepare_body(notification: Notification):
           <li><strong>Project:</strong> {notification.project}</li>
           <li><strong>Branch:</strong> {notification.branch}</li>
           <li><strong>Commit:</strong> {notification.commit} </li>
-          <li><strong>Author:</strong> {notification.author} </li>
+          <li><strong>Authors:</strong> {", ".join(notification.author) } </li>
           <li><strong>Build Status:</strong> {notification.status} </li>
-          <li><strong>Build Output:</strong> {notification.output} </li>
+          {f"<li><strong>Build Output:</strong> {notification.output} </li>"}
           {f"<li><strong>Build Timestamp:</strong> {notification.timestamp} </li>" if notification.timestamp else ""} 
         </ul>        
       </body>
