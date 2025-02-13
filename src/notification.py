@@ -28,6 +28,7 @@ class Notification(BaseModel):
     commit: str
     project: str
     status: bool
+    output: str | None = None
     timestamp: str | None = None
 
 
@@ -58,6 +59,7 @@ def prepare_body(notification: Notification):
           <li><strong>Commit:</strong> {notification.commit} </li>
           <li><strong>Author:</strong> {notification.author} </li>
           <li><strong>Build Status:</strong> {notification.status} </li>
+          <li><strong>Build Output:</strong> {notification.output} </li>
           {f"<li><strong>Build Timestamp:</strong> {notification.timestamp} </li>" if notification.timestamp else ""} 
         </ul>        
       </body>

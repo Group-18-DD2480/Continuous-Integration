@@ -34,7 +34,7 @@ async def github_webhook(payload: GitHubWebhook):
     # Run tests
     test_result = await run_tests("tests")
 
-    await send_notification(Notification(branch=branch,commit=commit_sha,project=repo_name,status=test_result))
+    await send_notification(Notification(branch=branch,commit=commit_sha,project=repo_name,status=test_result["success"],output=test_result["output"]))
 
     return {
         "status": "completed",
