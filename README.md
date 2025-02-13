@@ -110,13 +110,17 @@ This project is licensed under MIT License. See `LICENSE` for details.
 #### [@AlessandroColi](https://github.com/AlessandroColi) - Alessandro Coli
 
 - [doc] Create GitHub issues for the project.
-- [doc] Document API and contributions in `README.md`.
+- [doc] Documentation API and contributions in `README.md`.
+- [doc] Add html file for API documentation
+- [doc] Add github page for API documentation
 
 
 #### [@eliasfloreteng](https://github.com/eliasfloreteng) - Elias Floreteng
 
 - [doc] Create GitHub issues for the project.
 - [feat] Add GitHub webhook endpoint.
+- [feat] Add `testing.py.
+- [refactor] Remove duplicate FastAPI server
 
 
 #### [@laykos0](https://github.com/laykos0) - Jakub Rybak
@@ -124,10 +128,15 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [doc] Create `README.md` with contribution style and license sections
 - [feat] add Skeleton Code for FastAPI.
 - [feat] Add `notification.py`.
+- [feat] Add tests for `notification.py`.
+- [doc] Add documentation of `notification.py`.
 
 
 #### [@RuriThomas](https://github.com/RuriThomas) - Ruri Osmon
-
+- [feat] create public url with ngrok 
+- [feat] add public webhook to repo
 
 #### [@YusufDemir1210](https://github.com/YusufDemir1210) - Yusuf Demir
-
+- [feat] Add `compilation.py`.
+- [feat] Add tests for `compilation.py`.
+- [doc] Add documentation of `compilation.py`.
