@@ -1,5 +1,17 @@
 # Continuous-Integration
 
+## Project Structure
+
+src/
+├── contains the CI server and the functions needed for sintax check, testing, and notification
+tests/
+├── contains a test file for each function
+docs/
+├── contains the HTML for the documentation API webpage
+.gitignore
+LICENSE 
+README.md 
+
 ## API Documentation
 
 You can view the API documentation hosted on GitHub Pages here:
