@@ -18,9 +18,6 @@
             padding: 20px;
             text-align: center;
         }
-        header h1 {
-            margin: 0;
-        }
         section {
             padding: 20px;
             margin: 20px;
@@ -40,17 +37,11 @@
             font-size: 16px;
             line-height: 1.6;
         }
-        ul {
-            margin-left: 20px;
-        }
         .endpoint {
             padding: 10px;
             margin-bottom: 20px;
             border-radius: 5px;
             background-color: #e9f4f7;
-        }
-        .endpoint p {
-            margin: 5px 0;
         }
         .param {
             background-color: #e6f7e6;
@@ -68,48 +59,65 @@
     </style>
 </head>
 <body>
-
 <header>
     <h1>CI Documentation</h1>
-    <p> A FastAPI application that listens to webhook events and triggers, Python syntax check, then tests and sends a notification </p>
+    <p>A FastAPI application that listens to webhook events, triggers Python syntax checks, runs tests, and sends notifications.</p>
 </header>
 
 <section>
     <h2>API Endpoints</h2>
 
     <div class="endpoint">
-        <h3>1. Syntax Check</h3>
+        <h3>1. Webhook Listener</h3>
         <p><strong>POST</strong> /webhook</p>
-        <p>This endpoint listens for CI compilation events (e.g., GitHub/GitLab push events) and triggers the following actions:</p>
+        <p>This endpoint listens for GitHub push events and triggers the following actions:</p>
         <ul>
             <li>Check out the triggered branch</li>
             <li>Pull the latest changes</li>
-            <li>Run a static syntax check using flake8</li>
+            <li>Run a static syntax check using Flake8</li>
+            <li>Execute tests using pytest</li>
         </ul>
-        <p><strong>Returns:</strong> A JSON dictionary with the result of the compilation process and syntax check.</p>
+        <p><strong>Returns:</strong> A JSON response with syntax check and test results.</p>
     </div>
 
     <div class="endpoint">
-        <h3>2. Send Notification Email</h3>
-        <p><strong>POST</strong> /send-notification</p>
-        <p>This endpoint sends a notification email after a CI build event with details such as author, branch, commit, and build status.</p>
-        <p><strong>Parameters:</strong></p>
+        <h3>2. Compilation Process</h3>
+        <p>The <code>compilation.py</code> module handles the compilation process for a given branch:</p>
         <ul>
-            <li><strong>author:</strong> Author of the commit (required)</li>
-            <li><strong>branch:</strong> Branch of the commit (required)</li>
-            <li><strong>commit:</strong> Commit ID (required)</li>
-            <li><strong>project:</strong> Project name (required)</li>
-            <li><strong>status:</strong> Build status (required; values: success, failure)</li>
-            <li><strong>timestamp:</strong> Timestamp of the build (optional)</li>
+            <li>Checks out the specified branch</li>
+            <li>Pulls the latest changes</li>
+            <li>Runs Flake8 for static analysis</li>
         </ul>
-        <p><strong>Returns:</strong> A string indicating whether the notification was successfully sent or an error message.</p>
+        <p><strong>Returns:</strong> Compilation logs and results.</p>
     </div>
 
+    <div class="endpoint">
+        <h3>3. Test Execution</h3>
+        <p>The <code>testing.py</code> module runs tests using pytest:</p>
+        <ul>
+            <li>Executes all tests in the specified directory</li>
+            <li>Captures test results and logs</li>
+        </ul>
+        <p><strong>Returns:</strong> A report of test results.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>4. Send Email Notification</h3>
+        <p><strong>POST</strong> /send-notification</p>
+        <p>Sends an email notification after a CI build event with details such as author, branch, commit, and build status.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>author:</strong> Commit author (required)</li>
+            <li><strong>branch:</strong> Branch name (required)</li>
+            <li><strong>commit:</strong> Commit ID (required)</li>
+            <li><strong>status:</strong> Build status (success/failure) (required)</li>
+        </ul>
+        <p><strong>Returns:</strong> Confirmation of email sent or an error message.</p>
+    </div>
 </section>
 
 <footer>
     <p>Software Engineering Group 18.</p>
 </footer>
-
 </body>
 </html>
