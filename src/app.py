@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Any
 import uvicorn
+from compilation import handle_compilation
 
 load_dotenv()
 
@@ -27,12 +28,15 @@ async def github_webhook(payload: GitHubWebhook):
     repo_name = payload.repository["full_name"]
     commit_sha = payload.head_commit["id"]
 
-    # TODO: add CI logic
+    # Run compilation process
+    compilation_result = await handle_compilation(branch)
+
     return {
-        "status": "received",
+        "status": "completed",
         "branch": branch,
         "repository": repo_name,
         "commit": commit_sha,
+        "compilation": compilation_result
     }
 
 
