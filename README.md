@@ -105,6 +105,21 @@ Reviever of the Pull Request is responsible for the merger.
 
 This project is licensed under MIT License. See `LICENSE` for details.
 
+## Dependencies
+
+- **Python** 3.13
+- **FastAPI**: Modern web framework for building APIs with Python
+- **Uvicorn**: ASGI server implementation, used to run the FastAPI application
+- **python-dotenv**: Loads environment variables from .env files
+- **Pydantic**: Data validation using Python type annotations
+- **GitPython**: Git repository interaction from Python
+- **fastapi-mail**: Email handling and sending functionality for FastAPI
+- **flake8**: Static code analysis and style checker
+- **pytest**: Testing framework
+- **pytest-asyncio**: Pytest plugin for testing async code
+- **httpx**: HTTP client used by FastAPI's TestClient
+- **fastapi.testclient**: Testing client for FastAPI applications
+
 ## Statement of Contributions
 
 #### [@AlessandroColi](https://github.com/AlessandroColi) - Alessandro Coli
