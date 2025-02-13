@@ -21,8 +21,18 @@ fast_mail = FastMail(
     )
 )
 
-
 class Notification(BaseModel):
+    """
+    Represents a notification containing details about a CI/CD build event.
+
+    Attributes:
+        authors (list[str]): List of the authors of the commit.
+        branch (str): The branch where the commit was made.
+        commit (str): The commit hash.
+        project (str): The project name.
+        status (str): The build status (e.g., success, failure).
+        timestamp (str | None): The timestamp of the build, if available.
+    """
     authors: list[str] 
     branch: str
     commit: str
@@ -31,8 +41,16 @@ class Notification(BaseModel):
     output: str | None = None
     timestamp: str | None = None
 
-
 async def send_notification(notification: Notification):
+    """
+    Sends an email notification with CI/CD build details.
+
+    Args:
+        notification (Notification): The notification details to be sent.
+
+    Returns:
+        None
+    """
     message = MessageSchema(
         subject=prepare_subject(notification),
         recipients=[fast_mail.config.MAIL_FROM],
@@ -41,12 +59,28 @@ async def send_notification(notification: Notification):
     )
     await fast_mail.send_message(message)
 
+def prepare_subject(notification: Notification) -> str:
+    """
+    Prepares the email subject line based on the notification details.
 
-def prepare_subject(notification: Notification):
+    Args:
+        notification (Notification): The notification containing build details.
+
+    Returns:
+        str: The formatted subject line.
+    """
     return f"[CI Notification] Build {notification.status} for commit {notification.commit} on branch {notification.branch}"
 
+def prepare_body(notification: Notification) -> str:
+    """
+    Prepares the email body in HTML format based on the notification details.
 
-def prepare_body(notification: Notification):
+    Args:
+        notification (Notification): The notification containing build details.
+
+    Returns:
+        str: The formatted HTML email body.
+    """
     return f"""
     <html>
       <body>
