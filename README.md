@@ -128,6 +128,8 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [doc] Documentation API and contributions in `README.md`.
 - [doc] Add html file for API documentation
 - [doc] Add github page for API documentation
+- [fix] Testing loop removed
+- [doc] Add dependecies to README
 
 
 #### [@eliasfloreteng](https://github.com/eliasfloreteng) - Elias Floreteng
@@ -136,6 +138,8 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [feat] Add GitHub webhook endpoint.
 - [feat] Add `testing.py.
 - [refactor] Remove duplicate FastAPI server
+- [doc] Add essence checklist
+- [fix] Update webhook tests and refactor compilation handling 
 
 
 #### [@laykos0](https://github.com/laykos0) - Jakub Rybak
@@ -148,8 +152,10 @@ This project is licensed under MIT License. See `LICENSE` for details.
 
 
 #### [@RuriThomas](https://github.com/RuriThomas) - Ruri Osmon
-- [feat] create public url with ngrok 
-- [feat] add public webhook to repo
+- [feat] Create public url with ngrok 
+- [feat] Add public webhook to repo
+- [fix] Notification 
+- [doc] Added server endpoints to README
 
 #### [@YusufDemir1210](https://github.com/YusufDemir1210) - Yusuf Demir
 - [feat] Add `compilation.py`.
