@@ -1,12 +1,11 @@
 from fastapi import FastAPI
-from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Any
 import uvicorn
 from compilation import handle_compilation
 from testing import run_tests
+from notification import Notification, send_notification
 
-load_dotenv()
 
 app = FastAPI()
 
@@ -34,6 +33,8 @@ async def github_webhook(payload: GitHubWebhook):
     
     # Run tests
     test_result = await run_tests("tests")
+
+    await send_notification(Notification(branch=branch,commit=commit_sha,project=repo_name,status=test_result))
 
     return {
         "status": "completed",

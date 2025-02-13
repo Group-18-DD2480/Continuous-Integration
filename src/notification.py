@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from fastapi_mail import (
     ConnectionConfig,
     FastMail,
@@ -7,6 +8,7 @@ from fastapi_mail import (
 )
 from pydantic import BaseModel
 
+load_dotenv()
 fast_mail = FastMail(
     ConnectionConfig(
         MAIL_FROM=os.getenv("MAIL_FROM"),
@@ -21,11 +23,11 @@ fast_mail = FastMail(
 
 
 class Notification(BaseModel):
-    author: str
+    author: str | None = None
     branch: str
     commit: str
     project: str
-    status: str
+    status: bool
     timestamp: str | None = None
 
 
