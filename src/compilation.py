@@ -1,3 +1,4 @@
+import os
 import git
 import os
 import subprocess
@@ -9,6 +10,12 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 async def handle_compilation(branch_name: str):
     """
     Handles the compilation process for a given branch.
+
+    Args:
+        branch_name (str): The name of the branch to compile.
+
+    Returns:
+        dict: A dictionary containing the compilation message and output.
     """
     try:
         # Log which branch triggered the CI
@@ -30,9 +37,15 @@ async def handle_compilation(branch_name: str):
     except Exception as e:
         raise Exception(f"Compilation error: {str(e)}")
 
-def run_syntax_check(directory):
+def run_syntax_check(directory: str) -> str:
     """
     Runs a Python syntax check (static analysis) using flake8.
+
+    Args:
+        directory (str): The directory containing the code to check.
+
+    Returns:
+        str: The result of the syntax check, or an error message if one occurs.
     """
     try:
         result = subprocess.run(["flake8", directory], capture_output=True, text=True)
