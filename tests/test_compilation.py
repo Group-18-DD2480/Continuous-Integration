@@ -1,10 +1,12 @@
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
+import pytest
 from src.app import app
 from src.compilation import handle_compilation, run_syntax_check
 
 client = TestClient(app)
 
+@pytest.mark.asyncio
 async def test_handle_compilation_valid_branch():
     with patch("src.compilation.git.Repo") as mock_repo:
         mock_repo.return_value.git.checkout = MagicMock()
