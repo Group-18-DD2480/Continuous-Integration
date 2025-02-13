@@ -4,7 +4,7 @@ import subprocess
 import asyncio
 
 # Automatically detect the absolute path of the project directory
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 async def handle_compilation(branch_name: str):
     """
