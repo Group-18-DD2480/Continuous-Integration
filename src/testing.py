@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 async def run_tests(directory: str):
@@ -17,13 +18,12 @@ async def run_tests(directory: str):
         Exception: If an unexpected error occurs while running the tests.
     """
     try:
-        # Run pytest with output capture
         result = subprocess.run(
             ["pytest", directory, "-v"],
             capture_output=True,
             text=True
         )
-        
+
         return {
             "success": result.returncode == 0,
             "output": result.stdout,
