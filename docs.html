@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
+    <link rel="shortcut icon" href="https://fastapi.tiangolo.com/img/favicon.png">
+    <title>CI Documentation</title>
+</head>
+<body>
+    <div id="swagger-ui"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+    
+    <script>
+        const ui = SwaggerUIBundle({
+            spec: {
+                "openapi": "3.1.0",
+                "info": {
+                    "title": "CI Webhook Listener",
+                    "description": "A FastAPI application that listens to webhook events and triggers, Python syntax check, then tests and sends a notification",
+                    "version": "1.0.0"
+                },
+                "paths": {
+                    "/webhook": {
+                        "post": {
+                            "tags": ["Webhook"],
+                            "summary": "Handle Webhook Event",
+                            "description": "Webhook listener for CI compilation.\n\n- Listens for webhook events (e.g., GitHub/GitLab push events).\n- Checks out the triggered branch.\n- Pulls the latest changes.\n- Runs a static syntax check using flake8.\n\n**Returns:**\n- A dictionary containing the compilation result.",
+                            "operationId": "webhook_handler_webhook_post",
+                            "responses": {
+                                "200": {
+                                    "description": "Successful Response",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "/syntax-check": {
+                        "get": {
+                            "tags": ["Syntax"],
+                            "summary": "Run Syntax Check",
+                            "description": "Runs a Python syntax check (static analysis) using flake8.\n\n**Parameters:**\n- directory: Path to the project directory.\n\n**Returns:**\n- A string containing the syntax check results or an error message.",
+                            "operationId": "run_syntax_check_syntax_check_get",
+                            "parameters": [
+                                {
+                                    "name": "directory",
+                                    "in": "query",
+                                    "required": true,
+                                    "schema": {
+                                        "type": "string",
+                                        "title": "Directory"
+                                    }
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "description": "Successful Response",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "string",
+                                                "title": "Response Run Syntax Check Syntax Check Get"
+                                            }
+                                        }
+                                    }
+                                },
+                                "422": {
+                                    "description": "Validation Error",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/HTTPValidationError"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "schemas": {
+                        "HTTPValidationError": {
+                            "properties": {
+                                "detail": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ValidationError"
+                                    },
+                                    "type": "array",
+                                    "title": "Detail"
+                                },
+                                "type": "object",
+                                "title": "HTTPValidationError"
+                            }
+                        },
+                        "ValidationError": {
+                            "properties": {
+                                "loc": {
+                                    "items": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "integer"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "title": "Location"
+                                    },
+                                    "msg": {
+                                        "type": "string",
+                                        "title": "Message"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "title": "Error Type"
+                                    }
+                                },
+                                "required": ["loc", "msg", "type"],
+                                "type": "object",
+                                "title": "ValidationError"
+                            }
+                        }
+                    }
+                }
+            },
+            "dom_id": "#swagger-ui",
+            "layout": "BaseLayout",
+            "deepLinking": true,
+            "showExtensions": true,
+            "showCommonExtensions": true,
+            oauth2RedirectUrl: window.location.origin + '/docs/oauth2-redirect',
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIBundle.SwaggerUIStandalonePreset
+            ]
+        });
+    </script>
+</body>
+</html>
