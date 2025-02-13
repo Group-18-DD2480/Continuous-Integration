@@ -5,10 +5,11 @@ import uvicorn
 from compilation import handle_compilation
 from testing import run_tests
 from notification import Notification, send_notification
+import os
 
 
 app = FastAPI()
-
+PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 class GitHubWebhook(BaseModel):
     ref: str
@@ -32,7 +33,7 @@ async def github_webhook(payload: GitHubWebhook):
     compilation_result = await handle_compilation(branch)
     
     # Run tests
-    test_result = await run_tests("tests")
+    test_result = await run_tests(os.path.join(PROJECT_DIR,"tests"))
 
     await send_notification(Notification(branch=branch,commit=commit_sha,project=repo_name,status=test_result["success"],output=test_result["output"]))
 
