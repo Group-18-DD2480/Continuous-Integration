@@ -2,15 +2,10 @@
 
 ## Project Structure
 
-src/
-├── contains the CI server and the functions needed for sintax check, testing, and notification
-tests/
-├── contains a test file for each function
-docs/
-├── contains the HTML for the documentation API webpage
-.gitignore
-LICENSE 
-README.md 
+- src:  contains the CI server and the functions needed for sintax check, testing, and notification
+- tests: contains a test file for each function
+- docs: contains the HTML for the documentation API webpage
+
 
 ## API Documentation
 
