@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import Any
 import uvicorn
 from compilation import handle_compilation
+from testing import run_tests
 
 load_dotenv()
 
@@ -30,13 +31,17 @@ async def github_webhook(payload: GitHubWebhook):
 
     # Run compilation process
     compilation_result = await handle_compilation(branch)
+    
+    # Run tests
+    test_result = await run_tests("tests")
 
     return {
         "status": "completed",
         "branch": branch,
         "repository": repo_name,
         "commit": commit_sha,
-        "compilation": compilation_result
+        "compilation": compilation_result,
+        "tests": test_result
     }
 
 
