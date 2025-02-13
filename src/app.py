@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Any
 import uvicorn
 
 load_dotenv()
@@ -11,9 +11,9 @@ app = FastAPI()
 
 class GitHubWebhook(BaseModel):
     ref: str
-    repository: Dict[str, Any]
-    commits: list[Dict[str, Any]]
-    head_commit: Dict[str, Any]
+    repository: dict[str, Any]
+    commits: list[dict[str, Any]]
+    head_commit: dict[str, Any]
 
 
 @app.get("/")
