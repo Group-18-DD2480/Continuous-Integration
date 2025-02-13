@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI Documentation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        header {
+            background-color: #3a7ca5;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #3a7ca5;
+        }
+        h3 {
+            color: #555;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        p, ul {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .endpoint {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #e9f4f7;
+        }
+        .endpoint p {
+            margin: 5px 0;
+        }
+        .param {
+            background-color: #e6f7e6;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #3a7ca5;
+            color: #fff;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CI Documentation</h1>
+    <p> A FastAPI application that listens to webhook events and triggers, Python syntax check, then tests and sends a notification </p>
+</header>
+
+<section>
+    <h2>API Endpoints</h2>
+
+    <div class="endpoint">
+        <h3>1. Syntax Check</h3>
+        <p><strong>POST</strong> /webhook</p>
+        <p>This endpoint listens for CI compilation events (e.g., GitHub/GitLab push events) and triggers the following actions:</p>
+        <ul>
+            <li>Check out the triggered branch</li>
+            <li>Pull the latest changes</li>
+            <li>Run a static syntax check using flake8</li>
+        </ul>
+        <p><strong>Returns:</strong> A JSON dictionary with the result of the compilation process and syntax check.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3>2. Send Notification Email</h3>
+        <p><strong>POST</strong> /send-notification</p>
+        <p>This endpoint sends a notification email after a CI build event with details such as author, branch, commit, and build status.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>author:</strong> Author of the commit (required)</li>
+            <li><strong>branch:</strong> Branch of the commit (required)</li>
+            <li><strong>commit:</strong> Commit ID (required)</li>
+            <li><strong>project:</strong> Project name (required)</li>
+            <li><strong>status:</strong> Build status (required; values: success, failure)</li>
+            <li><strong>timestamp:</strong> Timestamp of the build (optional)</li>
+        </ul>
+        <p><strong>Returns:</strong> A string indicating whether the notification was successfully sent or an error message.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>Software Engineering Group 18.</p>
+</footer>
+
+</body>
+</html>
