@@ -140,3 +140,7 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [feat] Add `compilation.py`.
 - [feat] Add tests for `compilation.py`.
 - [doc] Add documentation of `compilation.py`.
+
+### Way of working & Essence checklist
+
+Our team's way of working is now at the "In Place" state according to the Essence framework. We have established clear principles for collaboration including standardized commit message and PR formats, code review processes, and GitHub Actions for running the tests on each commit. Our practices and tools are actively being used for real work, with regular inspections through pull requests and code reviews. The team has adapted practices to fit our context, such as using GitHub issues, PRs and maintaining clear documentation. These practices have now been used by all group members to perform their work. We are continuously improving our way of working and discussing it during meetings. Communication and collaboration are done through WhatsApp, Discord and issue comments.
