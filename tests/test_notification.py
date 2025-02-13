@@ -10,11 +10,11 @@ async def test_send_notification():
     fast_mail.config.SUPPRESS_SEND = 1
     with fast_mail.record_messages() as captured_messages:
         notification = Notification(**{
-            "author": "Test-Author",
+            "authors": ["Test-Author"],
             "branch": "Test-Branch",
             "commit": "Test-Commit",
             "project": "Test-Project",
-            "status": "Success",
+            "status": True, 
         })
         await send_notification(notification)
         assert len(captured_messages) == 1
@@ -29,7 +29,7 @@ async def test_send_notification_missing_commit_data():
     fast_mail.config.SUPPRESS_SEND = 1
     with pytest.raises(ValidationError):
         notification = Notification(**{
-            "author": "Test-Author",
-            "branch": "Test-Branch"
+            "authors": ["Test-Author"],
+            "branch": "Test-Branch",
         })
         await send_notification(notification)
