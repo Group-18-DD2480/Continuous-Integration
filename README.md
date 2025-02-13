@@ -6,13 +6,12 @@ You can view the API documentation hosted on GitHub Pages here:
 
 [CI API Documentation](https://group-18-dd2480.github.io/Continuous-Integration/)
 
-### CI Compilation (Static Syntax Check)
-
-#### Webhook Implementation
+### Webhook Implementation
 - The CI server is implemented using FastAPI.
 - A webhook triggers syntax checks whenever a push event occurs.
 
-#### How Compilation Works
+### CI Compilation (Static Syntax Check)
+
 1. When a push event occurs, a webhook triggers the CI server.
 2. The CI server pulls the latest code from the repository.
 3. It runs `flake8` to perform a static syntax check.
@@ -53,6 +52,13 @@ fast_mail = FastMail(
 
 #### Tests
 Notification system has been unit tested using the `pytest` package by mocking a sample mailbox, capturing the messages and verifying whether the notifications are successfully sent. Email dispatch is suppressed during unit tests, ensuring that no actual messages are sent. Furthermore, type error handling tests have been implemented, validating whether appropriate exceptions are raised if the notification is missing required information.
+
+This CI server automates compilation, testing, and notifications for project changes.
+
+### Workflow
+1. A webhook triggers compilation (`/compile`).
+2. On success, tests run (`/test`).
+3. Results are emailed via `/notify`.
 
 ## Contribution Style
 
