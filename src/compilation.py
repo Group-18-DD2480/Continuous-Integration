@@ -1,29 +1,18 @@
-from fastapi import FastAPI, HTTPException, Request
-import subprocess
 import git
 import os
-import asyncio  # Added for async execution of blocking calls
-
-app = FastAPI()
+import subprocess
+import asyncio
 
 # Automatically detect the absolute path of the project directory
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-@app.post("/webhook")
-async def webhook_handler(request: Request):
+async def handle_compilation(branch_name: str):
     """
-    Webhook listener for CI compilation.
-    Triggers static syntax checking for Python when a push event occurs.
+    Handles the compilation process for a given branch.
     """
     try:
-        payload = await request.json()
-        branch_name = payload.get("ref", "").replace("refs/heads/", "")
-
-        if not branch_name:
-            raise HTTPException(status_code=400, detail="Invalid payload: No branch found")
-
         # Log which branch triggered the CI
-        print(f"Received webhook event for branch: {branch_name}")
+        print(f"Processing compilation for branch: {branch_name}")
 
         # Pull the latest changes for the triggered branch asynchronously
         repo = git.Repo(PROJECT_DIR)
@@ -39,7 +28,7 @@ async def webhook_handler(request: Request):
         }
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise Exception(f"Compilation error: {str(e)}")
 
 def run_syntax_check(directory):
     """

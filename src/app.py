@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Any
 import uvicorn
+from compilation import handle_compilation
 
 load_dotenv()
 
@@ -11,9 +12,9 @@ app = FastAPI()
 
 class GitHubWebhook(BaseModel):
     ref: str
-    repository: Dict[str, Any]
-    commits: list[Dict[str, Any]]
-    head_commit: Dict[str, Any]
+    repository: dict[str, Any]
+    commits: list[dict[str, Any]]
+    head_commit: dict[str, Any]
 
 
 @app.get("/")
@@ -27,12 +28,15 @@ async def github_webhook(payload: GitHubWebhook):
     repo_name = payload.repository["full_name"]
     commit_sha = payload.head_commit["id"]
 
-    # TODO: add CI logic
+    # Run compilation process
+    compilation_result = await handle_compilation(branch)
+
     return {
-        "status": "received",
+        "status": "completed",
         "branch": branch,
         "repository": repo_name,
         "commit": commit_sha,
+        "compilation": compilation_result
     }
 
 
