@@ -6,6 +6,44 @@ You can view the API documentation hosted on GitHub Pages here:
 
 [CI API Documentation](https://group-18-dd2480.github.io/Continuous-Integration/)
 
+## API Endpoints
+
+### 1. Syntax Check
+
+#### `POST /webhook`
+
+This endpoint listens for CI compilation events (e.g., GitHub/GitLab push events) and triggers the following actions:
+
+- Check out the triggered branch  
+- Pull the latest changes  
+- Run a static syntax check using `flake8`  
+
+**Returns:**  
+A JSON dictionary with the result of the compilation process and syntax check.
+
+---
+
+### 2. Send Notification Email
+
+#### `POST /send-notification`
+
+This endpoint sends a notification email after a CI build event with details such as author, branch, commit, and build status.
+
+#### Parameters:
+
+| Parameter  | Type   | Required | Description |
+|------------|--------|----------|-------------|
+| `authors`   | string | ✅      | Authors of the commit |
+| `branch`   | string | ✅       | Branch of the commit |
+| `commit`   | string | ✅       | Commit ID |
+| `project`  | string | ✅       | Repository name |
+| `status`   | string | ✅       | Build status (`success` or `failure`) |
+| `timestamp`| string | ❌       | Timestamp of the build |
+
+**Returns:**  
+A string indicating whether the notification was successfully sent or an error message.
+
+
 ### Webhook Implementation
 - The CI server is implemented using FastAPI.
 - A webhook triggers syntax checks whenever a push event occurs.
