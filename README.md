@@ -21,7 +21,7 @@ You can view the API documentation hosted on GitHub Pages here:
 #### Running Locally
 To test the CI locally:
 ```bash
-uvicorn compilation:app --host 0.0.0.0 --port 8000
+python src/app.py
 ```
 
 ### Notification
