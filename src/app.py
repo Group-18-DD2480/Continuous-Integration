@@ -22,7 +22,6 @@ class GitHubWebhook(BaseModel):
 def root():
     return {"message": "CI"}
 
-
 @app.post("/webhook")
 async def github_webhook(payload: GitHubWebhook):
     branch = payload.ref.split("/")[-1]
