@@ -1,11 +1,56 @@
 # Continuous-Integration
 
+## Project Structure
+
+- src:  contains the CI server and the functions needed for sintax check, testing, and notification
+- tests: contains a test file for each function
+- docs: contains the HTML for the documentation API webpage
+
+
 ## API Documentation
 
 
 You can view the API documentation hosted on GitHub Pages here:
 
 [CI API Documentation](https://group-18-dd2480.github.io/Continuous-Integration/)
+
+## API Endpoints
+
+### 1. Syntax Check
+
+#### `POST /webhook`
+
+This endpoint listens for CI compilation events (e.g., GitHub/GitLab push events) and triggers the following actions:
+
+- Check out the triggered branch  
+- Pull the latest changes  
+- Run a static syntax check using `flake8`  
+
+**Returns:**  
+A JSON dictionary with the result of the compilation process and syntax check.
+
+---
+
+### 2. Send Notification Email
+
+#### `POST /send-notification`
+
+This endpoint sends a notification email after a CI build event with details such as author, branch, commit, and build status.
+
+#### Parameters:
+
+| Parameter  | Type   | Required | Description |
+|------------|--------|----------|-------------|
+| `authors`   | string | ✅      | Authors of the commit |
+| `branch`   | string | ✅       | Branch of the commit |
+| `commit`   | string | ✅       | Commit ID |
+| `project`  | string | ✅       | Repository name |
+| `status`   | string | ✅       | Build status (`success` or `failure`) |
+| `timestamp`| string | ❌       | Timestamp of the build |
+
+**Returns:**  
+A string indicating whether the notification was successfully sent or an error message.
+
 
 ### Webhook Implementation
 - The CI server is implemented using FastAPI.
@@ -129,6 +174,8 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [doc] Documentation API and contributions in `README.md`.
 - [doc] Add html file for API documentation
 - [doc] Add github page for API documentation
+- [fix] Testing loop removed
+- [doc] Add dependecies to README
 
 
 #### [@eliasfloreteng](https://github.com/eliasfloreteng) - Elias Floreteng
@@ -137,6 +184,8 @@ This project is licensed under MIT License. See `LICENSE` for details.
 - [feat] Add GitHub webhook endpoint.
 - [feat] Add `testing.py.
 - [refactor] Remove duplicate FastAPI server
+- [doc] Add essence checklist
+- [fix] Update webhook tests and refactor compilation handling 
 
 
 #### [@laykos0](https://github.com/laykos0) - Jakub Rybak
@@ -149,8 +198,10 @@ This project is licensed under MIT License. See `LICENSE` for details.
 
 
 #### [@RuriThomas](https://github.com/RuriThomas) - Ruri Osmon
-- [feat] create public url with ngrok 
-- [feat] add public webhook to repo
+- [feat] Create public url with ngrok 
+- [feat] Add public webhook to repo
+- [fix] Notification 
+- [doc] Added server endpoints to README
 
 #### [@YusufDemir1210](https://github.com/YusufDemir1210) - Yusuf Demir
 - [feat] Add `compilation.py`.
