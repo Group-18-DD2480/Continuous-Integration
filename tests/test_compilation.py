@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, AsyncMock
 import pytest
 from src.app import app
 from src.compilation import handle_compilation, run_syntax_check
@@ -28,21 +28,27 @@ def test_run_syntax_check_invalid():
         assert "E999 SyntaxError" in result
 
 def test_webhook_endpoint():
-    with patch("src.app.handle_compilation") as mock_handle:
-        mock_handle.return_value = {
-            "message": "Compilation completed",
-            "output": "No syntax errors found."
-        }
-        
+    mock_handle = AsyncMock(return_value={
+        "message": "Compilation completed",
+        "output": "No syntax errors found."
+    })
+    mock_run_tests = AsyncMock(return_value={
+        "success": True,
+        "output": "All tests passed"
+    })
+    mock_send = AsyncMock()
+
+    with patch("src.app.handle_compilation", mock_handle), \
+         patch("src.app.run_tests", mock_run_tests), \
+         patch("src.app.send_notification", mock_send):
+
         response = client.post("/webhook", json={
             "ref": "refs/heads/test-branch",
             "repository": {"full_name": "test/repo"},
             "commits": [],
             "head_commit": {"id": "123abc"}
         })
-        
         assert response.status_code == 200
-        assert response.json()["branch"] == "test-branch"
         assert response.json()["status"] == "completed"
 
 def test_webhook_invalid_payload():

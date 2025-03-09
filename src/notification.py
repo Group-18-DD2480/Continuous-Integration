@@ -17,7 +17,7 @@ fast_mail = FastMail(
         MAIL_SERVER=os.getenv("MAIL_SERVER"),
         MAIL_PORT=os.getenv("MAIL_PORT"),
         MAIL_STARTTLS=False,
-        MAIL_SSL_TLS=True,
+        MAIL_SSL_TLS=False,
     )
 )
 
