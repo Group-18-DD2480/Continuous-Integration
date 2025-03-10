@@ -8,7 +8,7 @@ async def test_run_tests():
     os.environ['NO_RECURSION'] = 'true'
     result = await run_tests("tests")
     assert isinstance(result, dict)
-    assert "success" in result
+    assert result["error"] is None
     assert "output" in result
 
 @pytest.mark.asyncio
