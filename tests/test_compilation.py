@@ -48,7 +48,7 @@ def test_webhook_endpoint():
             "commits": [],
             "head_commit": {"id": "123abc"}
         })
-        assert response.status_code == 20
+        assert response.status_code == 200
         assert response.json()["status"] == "completed"
 
 def test_webhook_invalid_payload():
