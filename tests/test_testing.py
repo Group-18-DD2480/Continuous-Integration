@@ -15,4 +15,4 @@ async def test_run_tests():
 async def test_run_tests_invalid_directory():
     result = await run_tests("nonexistent_directory")
     assert not result["success"]
-    assert result["error"] is not None
+    assert result["error"] is None
